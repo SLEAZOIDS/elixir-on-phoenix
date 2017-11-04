@@ -54,5 +54,5 @@ config :blog, Blog.Repo,
   username: "root",
   password: "",
   database: "blog_dev",
-  hostname: "localhost",
+  hostname: "mysql",
   pool_size: 10
