@@ -14,4 +14,4 @@ services:
       - mysql
     ports:
       - "4000:4000"
-    command: bash -c "mix deps.get && mix phoenix.server"
+    command: bash -c "cd assets && npm install && cd /var/opt/app && mix deps.get && mix ecto.create && mix ecto.migrate && mix phoenix.server"
