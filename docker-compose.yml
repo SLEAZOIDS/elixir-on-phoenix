@@ -1,23 +1,17 @@
 version: '2'
 services:
-  storage:
-    image: busybox
-    volumes:
-      - /var/lib/mysql
   mysql:
     image: mysql
     environment:
-      - "TZ=Japan"
-    networks:
-      - default
+      MYSQL_ROOT_PASSWORD: secret
     ports:
       - '3306:3306'
   elixir:
-    image: h3poteto/phoenix
+    build: .
     volumes:
       - .:/var/opt/app
     depends_on:
       - mysql
     ports:
       - "4000:4000"
-    command: mix phoenix.server
+    command: bash -c "mix deps.get && mix phoenix.server"

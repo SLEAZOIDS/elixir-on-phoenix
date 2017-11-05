@@ -1,27 +1,14 @@
-FROM elixir
+FROM marcelocg/phoenix
 
 ENV APP_DIR /var/opt/app
 
+# inotify-toolsのインストール
 RUN set -x && \
   apt-get update && \
-  apt-get install -y --no-install-recommends \
-  nodejs \
-  npm \
-  mysql-client \
-  inotify-tools \
-  git \
-  imagemagick \
-  curl && \
-  rm -rf /var/lib/apt/lists/* && \
-  npm cache clean && \
-  npm install n -g && \
-  n stable && \
-  ln -sf /usr/local/bin/node /usr/bin/node && \
-  apt-get purge -y nodejs npm
+  apt-get install -y --no-install-recommends inotify-tools
 
-RUN useradd -m -s /bin/bash elixir
-RUN echo 'elixir:password' | chpasswd
-RUN mkdir -p ${APP_DIR}
-USER elixir
+# hexのインストール
+RUN yes | mix local.hex
 
 WORKDIR ${APP_DIR}
+

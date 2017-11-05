@@ -52,7 +52,7 @@ config :phoenix, :stacktrace_depth, 20
 config :blog, Blog.Repo,
   adapter: Ecto.Adapters.MySQL,
   username: "root",
-  password: "",
+  password: "secret",
   database: "blog_dev",
   hostname: "mysql",
   pool_size: 10
